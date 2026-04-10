@@ -1,5 +1,4 @@
 import pytest
-import os
 from population_analyzer import read_population_data, calculate_population_change
 
 
