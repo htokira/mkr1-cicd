@@ -19,3 +19,20 @@ def read_population_data(filepath: str) -> dict:
                 data[country][year] = population
                 
     return data
+
+def calculate_population_change(data: dict) -> dict:
+    changes = {}
+
+    for country, yearly_data in data.items():
+        sorted_years = sorted(yearly_data.keys())
+        changes[country] = {}
+        
+        for i in range(1, len(sorted_years)):
+            prev_year = sorted_years[i-1]
+            curr_year = sorted_years[i]
+            
+            change = yearly_data[curr_year] - yearly_data[prev_year]
+            period = f"{prev_year}-{curr_year}"
+            changes[country][period] = change
+
+    return changes
