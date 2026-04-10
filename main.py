@@ -1,4 +1,4 @@
-from population_analyzer import read_population_data
+from population_analyzer import read_population_data, calculate_population_change
 
 def main():
     """Основна функція для запуску програми."""
@@ -12,7 +12,17 @@ def main():
         print("Немає даних для обробки.")
         return
     
-    print(raw_data)
+    results = calculate_population_change(raw_data)
+
+    for country, periods in results.items():
+        print(f"\nКраїна: {country}")
+
+        if not periods:
+            print("Недостатньо даних для порівняння.")
+        
+        for period, change in periods.items():
+            sign = "+" if change > 0 else ""
+            print(f"Період {period}: {sign}{change:,} осіб")
 
 if __name__ == "__main__":
     main()
